@@ -2,11 +2,15 @@
 
 Plex is a media delivery system that can be used to serve video content for the home network and beyond the walls of the home.
 
-# Mapping
+# Information
 
 The docker container maps to a local folder set which contains the media files, database and metadata consumed by the Plex Media service. 
 
 Operating in a docker container, the config is set for host networking to utilise the host machine's IP address exposing a single port, 32400.
+
+In this configuration we are using a data mount point on the host for all of the plex media content.
+
+----
 
 # Construction
 
@@ -15,7 +19,7 @@ Operating in a docker container, the config is set for host networking to utilis
 ### If you have a secondary data disk
 If you have to mount the secondary data disk on the host system which holds the media files:
 
-*** Local Drive ***
+**Local Drive**
 Find the drive ID for the unmounted item with a :
 ```
 lsblk
@@ -27,7 +31,7 @@ sudo mount /dev/sdb1 /media/plexdrive/
 
 This plex data mount point can be used later in the configuration to map into the container. You could utilise a network mount from a NAS box in a similar way, simply use that mount point as necessary.
 
-***Example Samba Mount from NAS:***
+**Example Samba Mount from NAS:**
 
 ```
 sudo mount -t cifs -o username=netadmin //192.168.1.10/plexmedia /media/plexdrive/

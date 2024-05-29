@@ -1,14 +1,16 @@
-# homegrid
-Home network services and components to generate a range of services as required.
+# :house: HomeGrid
+Home network services and components to generate a range of platforms as required to run the house.
 
 
-## Plex
+## :tv: Plex
+[View Setup >](./plex/README.md)
+
 Plex Media services in docker format for media delivery.
-[View >](./plex/README.md)
+
 Contains the docker compose file to get going and the steps to initiate the configuration on a system.
 
-## Monitoring
+## :bar_chart: Monitoring
 Monitoring Services
 
-## Alerting Services
+## :warning: Alerting Services
 Alerting Services

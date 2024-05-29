@@ -1,4 +1,4 @@
-# Plex Media Services
+# :tv: Plex Media Services
 
 Plex is a media delivery system that can be used to serve video content for the home network and beyond the walls of the home.
 

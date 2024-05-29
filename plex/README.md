@@ -40,6 +40,15 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
+**Sign in to Docker**
+You must sign in to Docker in order to pull the containers as necessary in the next steps:
+
+```
+docker login
+```
+
+Enter your details in the command prompt for your Docker Account [Registered for Docker?](https://hub.docker.com)
+
 ## Docker Compose file
 
 Description:
@@ -75,4 +84,15 @@ Head to the directory of the docker compose yaml file and run:
 ```
 docker-compose up -d
 ```
+
+# Verify Running
+
+Check your docker container is running with:
+
+```
+docker ps
+```
+
+***Web Interface:***
+Launch your web browser and navigate to your machine's name or IP address and add the port number after it, e.g. : https://mymachine:32400
 

@@ -41,14 +41,14 @@ sudo mount -t cifs -o username=netadmin //192.168.1.10/plexmedia /media/plexdriv
 
 **Install Docker**
 ```
-apt install docker-compose -y
+sudo apt install docker-compose -y
 ```
 
 **Enable Service**
 Launch the service and set it to run on boot
 ```
-systemctl start docker
-systemctl enable docker
+sudo systemctl start docker
+sudo systemctl enable docker
 ```
 
 **User Permissions**
@@ -56,7 +56,7 @@ Set up user and group for the docker container
 
 ```
 sudo usermod -aG docker $USER
-newgrp docker
+sudo newgrp docker
 ```
 
 **Sign in to Docker**

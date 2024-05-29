@@ -14,3 +14,6 @@ Monitoring Services
 
 ## :warning: Alerting Services
 Alerting Services
+
+## :cloud: Weather Services
+Weather Data Collection services

@@ -12,10 +12,25 @@ Operating in a docker container, the config is set for host networking to utilis
 
 ## Pre-build items
 
-Mount the secondary data disk on the host system which holds the media files:
+### If you have a secondary data disk
+If you have to mount the secondary data disk on the host system which holds the media files:
+
+*** Local Drive ***
+Find the drive ID for the unmounted item with a :
+```
+lsblk
+```
 
 ```
 sudo mount /dev/sdb1 /media/plexdrive/
+```
+
+This plex data mount point can be used later in the configuration to map into the container. You could utilise a network mount from a NAS box in a similar way, simply use that mount point as necessary.
+
+***Example Samba Mount from NAS:***
+
+```
+sudo mount -t cifs -o username=netadmin //192.168.1.10/plexmedia /media/plexdrive/
 ```
 
 ### Install and Configure Docker
@@ -52,7 +67,7 @@ Enter your details in the command prompt for your Docker Account [Registered for
 ## Docker Compose file
 
 Description:
-- The volumes in this compose file map to the host filesystem volumes. The networking is set to host mode, so it acts as if it were the host machine ( rather than requesting further IP addresses from DHCP )
+- The volumes in this compose file map to the host filesystem volumes. The networking is set to host mode, so it acts as if it were the host machine ( rather than requesting further IP addresses from DHCP ). The below code maps the host directories to the container directories, modify yours as appropriate.
 - The PUID and PGID are obtained from the /etc/password file on the host with the groupid for your current user or the plex user ( likely 1000 ).
 - The Plex Claim must be obtained from [The Plex Website](https://plex.tx/claim). This has a 4 minute timeout on the claim so you must launch the docker container quickly after adding the claim ID to the compose file.
 

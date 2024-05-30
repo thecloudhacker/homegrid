@@ -1,0 +1,15 @@
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=999
+      - PGID=999
+      - TZ=Europe/London
+      - PLEX_CLAIM=claim-id-here
+    volumes:
+      - /media/plexdrive/database:/config
+      - /media/plexdrive/transcode:/transcode
+      - /media/plexdrive/media:/data
+    restart: unless-stopped

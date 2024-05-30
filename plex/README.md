@@ -70,6 +70,8 @@ Enter your details in the command prompt for your Docker Account [Registered for
 
 ## Docker Compose file
 
+[View Compose File](docker-compose.yml)
+
 Description:
 - The volumes in this compose file map to the host filesystem volumes. The networking is set to host mode, so it acts as if it were the host machine ( rather than requesting further IP addresses from DHCP ). The below code maps the host directories to the container directories, modify yours as appropriate.
 - The PUID and PGID are obtained from the /etc/password file on the host with the groupid for your current user or the plex user ( likely 1000 ).

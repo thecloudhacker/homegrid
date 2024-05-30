@@ -10,7 +10,7 @@ Plex Media services in docker format for media delivery.
 Contains the docker compose file to get going and the steps to initiate the configuration on a system.
 
 ## :bar_chart: Monitoring
-Monitoring Services
+Monitoring Services [View Services](./Monitoring/README.md)
 
 ## :warning: Alerting Services
 Alerting Services

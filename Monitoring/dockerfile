@@ -1,0 +1,50 @@
+FROM ubuntu:22.04
+
+# Set non-interactive to suppress geolocation prompts
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Main Package Installation
+RUN apt update
+RUN apt install -y autoconf gcc libc6 make wget unzip apache2 apache2-utils php libgd-dev libmcrypt-dev libssl-dev bc gawk dc build-essential snmp libnet-snmp-perl gettext
+RUN apt upgrade -y
+RUN mkdir -p /opt/nagios
+
+# User and Group Configuration
+RUN useradd -m -s /bin/bash nagios
+RUN groupadd nagcmd
+RUN usermod -a -G nagcmd nagios
+RUN usermod -a -G nagcmd www-data
+
+# Get Nagios Core
+WORKDIR /tmp
+RUN wget -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.5.2.tar.gz
+RUN tar xzf nagioscore.tar.gz
+
+# Compile Nagios Core
+WORKDIR  /tmp/nagioscore-nagios-4.5.2/
+RUN ./configure --with-nagios-group=nagios --with-command-group=nagcmd
+RUN make all
+RUN make install
+RUN make install-commandmode
+RUN make install-init
+RUN make install-config
+RUN /usr/bin/install -c -m 644 sample-config/httpd.conf /etc/apache2/sites-available/nagios.conf
+
+# Install Nagios plugins
+RUN apt update
+RUN apt install nagios-plugins -y
+RUN cp /usr/lib/nagios/plugins/* /usr/local/nagios/libexec/
+# Enable services
+RUN /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+
+# Configure Apache and Web Authentication
+RUN ln -s /etc/apache2/sites-available/nagios.conf /etc/apache2/sites-enabled/
+RUN a2enmod cgi rewrite
+RUN htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin nagadmin123
+
+# Start Services
+RUN service nagios start
+RUN service apache2 start
+
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/apachectl","-D","FOREGROUND"]

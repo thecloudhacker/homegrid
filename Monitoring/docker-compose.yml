@@ -1,0 +1,18 @@
+services:
+  nagios:
+    image: nagios:latest
+    container_name: nagios
+    networks:
+      - nagnetwork
+    environment:
+      - TZ=Europe/London
+      - PGID=1000
+      - PUID=1000
+    volumes:
+      - /Users/rick/Documents/nagios:/datastore
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+networks:
+      nagnetwork:
+        driver: bridge
